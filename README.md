@@ -13,6 +13,44 @@ Get your monitoring stack up and running with one command using a Docker Compose
 - **[Uncomplicated Alert Receiver](https://github.com/jamesread/uncomplicated-alert-receiver)**: UI with Received Alerts.
 - **[Loki](https://github.com/grafana/loki)**: Logs (including explore-logs).
 
+## Installation Options
+
+### Local Development (Docker Compose)
+
+For local development and testing, use the standard Docker Compose setup described below.
+
+### Production VM Installation
+
+For production VM deployments with persistent data and systemd management, use the unified management script:
+
+```bash
+# Download the unified script
+curl -sSL https://raw.githubusercontent.com/angelbarrera92/docker-monitoring-stack-gpnc/main/stack.sh -o stack.sh
+chmod +x stack.sh
+
+# Install with single command
+sudo ./stack.sh install -d /mnt/monitoring-data -a alertmanager-slack-config.yml
+
+# Manage the stack
+./stack.sh start          # Start services
+./stack.sh logs           # View real-time logs  
+./stack.sh health         # Check service health
+./stack.sh fix-permissions # Fix data permissions
+./stack.sh backup         # Create backup
+./stack.sh uninstall      # Remove installation
+```
+
+**Key Features:**
+- � **One Script**: All functionality in a single file
+- 🔧 **Complete Management**: Install, manage, maintain, and uninstall
+- 🛡️ **Permission Handling**: Automatic container permission fixes
+- 💾 **Data Persistence**: Configurable persistent storage
+- 📊 **Health Monitoring**: Built-in service health checks
+- 🔄 **Easy Updates**: Simple update and backup system
+
+�📖 **[Complete VM Installation Guide](INSTALL.md)** - Detailed instructions for production deployments  
+🔄 **[Migration Guide](MIGRATION.md)** - Upgrade from old scripts to unified script
+
 ## Makefile
 
 [Note](https://docs.docker.com/compose/install/linux/): Due to `docker-compose` and the `compose` plugin, you might have one of the two installed. I have a `Makefile` that will detect which on you have installed.
